@@ -1,0 +1,155 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "FHS.CT.AlgoDat/1.1.4": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/FHS.CT.AlgoDat.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/FHS.CT.AlgoDat.dll": {
+            "related": ".pdb"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FHS.CT.AlgoDat/1.1.4": {
+      "sha512": "wcXprgLI2VdOZRf+WS/C4Go1Dla6M7vrgZR6iXj3IvGIhygzWZYVrfzZCBSA7nPRw8sgukS90gC5grJXmllNNQ==",
+      "type": "package",
+      "path": "fhs.ct.algodat/1.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "fhs.ct.algodat.1.1.4.nupkg.sha512",
+        "fhs.ct.algodat.nuspec",
+        "icon.png",
+        "lib/net6.0/FHS.CT.AlgoDat.dll",
+        "lib/net6.0/FHS.CT.AlgoDat.pdb",
+        "src/src/FHS/CT/AlgoDat/Algorithms/BreadthFirstSearch.cs",
+        "src/src/FHS/CT/AlgoDat/Algorithms/DepthFirstSearch.cs",
+        "src/src/FHS/CT/AlgoDat/Algorithms/InsertionSort.cs",
+        "src/src/FHS/CT/AlgoDat/Algorithms/JaroWinkler.cs",
+        "src/src/FHS/CT/AlgoDat/Algorithms/MSTKruskal.cs",
+        "src/src/FHS/CT/AlgoDat/Algorithms/MSTPrim.cs",
+        "src/src/FHS/CT/AlgoDat/Algorithms/MergeSort.cs",
+        "src/src/FHS/CT/AlgoDat/Algorithms/QuickSort.cs",
+        "src/src/FHS/CT/AlgoDat/Algorithms/SelectionSort.cs",
+        "src/src/FHS/CT/AlgoDat/Algorithms/ShortestPath.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/AvlTree.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/BTree.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/BinarySearchTree.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/Dictionary.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/DoubleLinkedList.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/Graph.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/HashTable.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/MinHeap.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/PriorityQueue.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/Queue.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/Stack.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/Tree.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/UnionFind.cs",
+        "src/src/FHS/CT/AlgoDat/DataStructures/WeightedGraph.cs",
+        "src/src/obj/Release/net6.0/src.GlobalUsings.g.cs",
+        "src/src/src.csproj"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "FHS.CT.AlgoDat >= 1.1.4"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\f.pointner\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\f.pointner\\Downloads\\FH-Cheat-Code-SoSe2026-haha-jk-wink-wink\\Algorithmen und Datenstrukturen\\Übung 12\\muster\\beispiel01.csproj",
+      "projectName": "beispiel01",
+      "projectPath": "C:\\Users\\f.pointner\\Downloads\\FH-Cheat-Code-SoSe2026-haha-jk-wink-wink\\Algorithmen und Datenstrukturen\\Übung 12\\muster\\beispiel01.csproj",
+      "packagesPath": "C:\\Users\\f.pointner\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\f.pointner\\Downloads\\FH-Cheat-Code-SoSe2026-haha-jk-wink-wink\\Algorithmen und Datenstrukturen\\Übung 12\\muster\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\f.pointner\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.200"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "dependencies": {
+          "FHS.CT.AlgoDat": {
+            "target": "Package",
+            "version": "[1.1.4, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[9.0.14, 9.0.14]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[9.0.14, 9.0.14]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.14, 9.0.14]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[9.0.14, 9.0.14]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

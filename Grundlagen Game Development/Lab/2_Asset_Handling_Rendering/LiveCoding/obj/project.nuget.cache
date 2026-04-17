@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "aOoUQivPvpY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\f.pointner\\Downloads\\FH-Cheat-Code-SoSe2026-haha-jk-wink-wink\\Grundlagen Game Development\\Lab\\2_Asset_Handling_Rendering\\LiveCoding\\GrundlagenGameDev.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\f.pointner\\.nuget\\packages\\csfml\\2.6.1\\csfml.2.6.1.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\sfml.audio\\2.6.1\\sfml.audio.2.6.1.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\sfml.graphics\\2.6.1\\sfml.graphics.2.6.1.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\sfml.net\\2.6.1\\sfml.net.2.6.1.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\sfml.system\\2.6.1\\sfml.system.2.6.1.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\sfml.window\\2.6.1\\sfml.window.2.6.1.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.20\\microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.20\\microsoft.windowsdesktop.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.20\\microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.20\\microsoft.netcore.app.host.win-x64.7.0.20.nupkg.sha512"
+  ],
+  "logs": []
+}

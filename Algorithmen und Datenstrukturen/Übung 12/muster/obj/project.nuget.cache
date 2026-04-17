@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "8YjtW1uVd9M=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\f.pointner\\Downloads\\FH-Cheat-Code-SoSe2026-haha-jk-wink-wink\\Algorithmen und Datenstrukturen\\Übung 12\\muster\\beispiel01.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\f.pointner\\.nuget\\packages\\fhs.ct.algodat\\1.1.4\\fhs.ct.algodat.1.1.4.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.14\\microsoft.netcore.app.ref.9.0.14.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.14\\microsoft.windowsdesktop.app.ref.9.0.14.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.14\\microsoft.aspnetcore.app.ref.9.0.14.nupkg.sha512",
+    "C:\\Users\\f.pointner\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\9.0.14\\microsoft.netcore.app.host.win-x64.9.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}
