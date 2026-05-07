@@ -1,0 +1,108 @@
+1.Klausur Zweitantritt
+Frage 1 Cache-Lines und Multithreading 
+a) erklären sie den Begriff (Cache-Line) und beschreiben Sie, wie die Speicheranordnung von Daten die Performance beeinflussen können. 
+b) Welche zusätzlichen Probleme entstehen bei der Verwendung von Cache-Lines in Multi-Threading-Szenarien? Nennen sie mindestens ein konkretes Phänomen und erläutern Sie dessen Auswirkung.
+
+Frage 2 Amdahlsches Gesetzt 
+a) Formulieren Sie das Amdahlsche Gesetzt in Mathematischer Form. Definieren sie die verwendeten Variablen.  
+b) Geben sie ein konkretes Beispiel an: Wenn 80% eines Programms parallelisiert werden können und 20% sequenziel bleiben, welche maximale Speed-up ist möglich? 
+
+Frage 3: Monitor basierte Synchronisation in C# 
+a) Erklären sie das Konzept eines Monitors im Kontext der Threadsynchronisation in C#
+b) Erläutern Sie die Funktionsweise folgender Methoden:
+- Monitor.Enter() / Monitor.Exit()
+- Monitor. Wait()
+- Monitor.Pulse() / Monitor.PulseAll()
+
+Frage 4 Closures in Lambda-Ausdrücken und Multithreading
+a) Welche Probleme entstehen, wenn Closures in Multi-Threading-Szenarien verwendet werden?
+b) Geben Sie ein konkretes c#-Codebeispiel an, das dieses Problem demonstriert und erklären sie, warum das Ergebnis nicht dem erwarteten Verhalten entspricht.
+
+Frage5: Unterschied zwischen Threads und Tasks in C#. 
+a) Vergleichen Sie die Konzepte Thread und Task in C#. Nennen Sie mindestens drei wesentliche Unterschiede.
+b) Schreiben Sie zwei kurze C# Codebeispiel 
+- Eines zum Erstellen und Starten eines Threads
+- Eines zum Erstellen und Starten eines Tasks
+
+Frage 6: Semaphore und das Barbershop-Problem (2 Punkte)
+Analysieren Sie das folgende C#-Programm (Barbershop-Problem) und bearbeiten Sie die folgenden Aufgaben:
+a) Erklären Sie die Funktion jedes verwendeten Semaphors:
+- waiting Room  
+- barberChair  
+- barberSleep 
+
+b) Ergänzen Sie aussadekraftige Kommentare an den vier markierten Positionen V/ 
+- barberSleep.Release(); (nach „Kunde setzt sich in den Warteraum") 
+- barberChair. WaitOne(); (nach barberSleep.Release()) 
+- waitingRoom.Release(); (nach barberChair. WaitOne()) 
+- barberSleep. WaitOne(); (im BarberWork-Loop)
+
+
+using System;
+using System.Threading;
+class Barbershop
+{
+	private static Semaphore waitingRoom; 
+	private static Semaphore barberChair; 
+	private static Semaphore barberSleep;
+	private static object lockObject = new object();
+	private static bool barberWorking = false;
+
+	static void Main()
+	{
+		int numberOfChairs = 3;
+		waitingRoom = new Semaphore(numberOfChairs, numberOfChairs);
+		barberChair = new Semaphore(1,1);
+		barberSleep = new Semaphore(0,1);
+
+		Thread barber = new Thread(BarberWork);
+		barber. Start):
+		for (int i = 1; i <= 10; i++)
+		{
+			int customerld = i;
+			Thread customer = new Thread(() => CustomerArrives(customerld));
+			customer.Start();
+			Thread.Sleep(new Random().Next(500, 1500)); // Kunden kommen zufällig
+		}
+
+		static void CustomerArrives(int id)
+		{
+		Console. WriteLine($"Kunde {id) kommt zum Friseur.");
+		if (waitingRoom.WaitOne(0))
+			{
+				Console. WriteLine($"Kunde {id} setzt sich in den Warteraum.);
+				barberSleep.Release(): //__________________________________
+				barberChair.WaitOne(): //__________________________________
+				watingRoom.Release();  //__________________________________
+
+				Console. WriteLine(S" Kunde (id) wird jetzt frisiert.); Wieder 1 Inread doren
+				Thread.Sleep(2000);
+				Console. WriteLine($"Kunde (id} ist fertig und geht."); barber Chair. Release();
+				barberChair.Release();
+			}
+			else
+			{
+				Console. WriteLine($"Kunde {id) geht wieder, da kein Platz im Warteraum.");
+			}
+			static void BarberWork)
+			{
+				while (true)
+				{
+					barberSleep.WaitOne()://__________________________________
+					Console. WriteLine("Friseur beginnt mit der Arbeit.");
+				}
+			}
+		}
+	}
+
+Frage 7: Concurrent Server und parallele Client-Verarbeitung
+a) Beschreiben sie zwei grundseätzliche unterschiedliche Technische Möglichkeiten, wei ein TCP-Server mehrere Client-Anfragen parallel verarbeiten kann:
+- Variante 1: Erste Möglichkeit - beschreiben Sie Funktionsweise und Vorteile/Nachteile
+- Variante 2: Zweite Möglichkeit - beschreiben sie Funktionsweise und Vor/Nachteile
+b) Nennen Sie je ein Szenario, in dem Sie die erste oder zweite Variante bevorzugen würden, und begründen Sie ihre Wahl kurz
+
+Frage 8: Remote Procedure Calls (RPC) 
+a) Erklären Sie das Konzept eines Remote Procedure Calls (RPC) und beschreiben Sie, wie es die Kommunikation zwischen verteilten Systemen vereinfacht. 
+b) Erläutern Sie die Rollen von Stub und Skeleton im RPC-Modell
+- was ist ein stub und welche Aufgaben erfüllt es?
+- Was ist ein Skeleton und welche aufgaben erfüllt es? 
