@@ -109,12 +109,14 @@ Termine stimmen nicht mehr ganz bin grad zu faul zum ändern
 **MMP1 GAME:**
 
 
+Ändert sich noch
+
 
 * 0\. Code Review-Termin 21.04.2026
 * 1\. Code-Review-Termin 22.04.2026
-* 2\. Code-Review-Termin 07.05.2026
-* 3\. Code-Review-Termin 13.05.2026
-* 4\. Code-Review-Termin 18./21.04.2026
+* 2\. Code-Review-Termin 13.05.2026
+* 3\. ?
+* 4\. ?
 
 
 
