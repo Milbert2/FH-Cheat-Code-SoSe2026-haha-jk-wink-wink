@@ -1,0 +1,144 @@
+body, h1, h2, h3, p {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins';
+    font-style: normal;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 75vw 25vw;
+    grid-template-rows: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.marketplace-wrapper {
+    grid-column: 1/ span 1;
+    grid-row: 1/ span 1;
+    overflow-y: auto;
+    padding: 8vh 2vw 2vh 2vw;
+    scrollbar-width: none;
+}
+
+.marketplace-wrapper h1 {
+    font-size: 2rem;
+}
+
+.marketplace-infos {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    padding-bottom: 2vh;
+}
+
+.marketplace-infos span {
+    color: #bbbbbb;
+    font-size: 0.8rem;
+}
+
+.marketplace-infos p {
+    padding: 5px 0 0 0;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.products-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 2vh 0;
+    column-gap: 20px;
+    row-gap: 30px;
+}
+
+.product {
+    border: 1px solid #F3F3F3;
+    border-radius: 15px;
+    max-width: fit-content;
+    padding: 2vh 2vw 2vh 1vw; 
+}
+
+.product img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.product h3 {
+    padding: 2vh 0 0 0;
+}
+
+.product .product-description {
+    color: #bababa;
+    font-weight: normal;
+    font-weight: 400;
+    font-size: 0.8rem;
+    padding: 10px 0;
+
+    max-width: 60%;
+    line-height: 1rem;
+}
+
+button {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 2vh;
+}
+
+.cart-wrapper {
+    grid-column: 2/ span 1;
+    grid-row: 1/ span 1;
+    background-color: #F3F3F3;
+
+    overflow-y: auto;
+    padding: 8vh 2vw 2vh 2vw;
+    scrollbar-width: none;
+}
+
+.cart-wrapper h2 {
+    font-size: 2rem;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.products-in-cart {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.products-in-cart li{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2vh;
+}
+
+.products-in-cart li .product-name {
+    width: 50%;
+    word-wrap: break-word;
+    white-space: initial;
+    text-align: left;
+    line-height: 1.2rem;
+}
+
+.cart-summary {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid #c0c0c0;
+    margin-top: 8vh;
+    padding-top: 1vh;
+}
+
+.cancel-order-button {
+    color: #c0c0c0;
+    justify-self: flex-end;
+    align-self: center;
+}
