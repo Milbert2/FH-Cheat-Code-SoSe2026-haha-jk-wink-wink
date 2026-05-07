@@ -1,0 +1,1 @@
+Kriterien für finale Abgaben bei beiden Ordnern drin. lg
