@@ -1,87 +1,212 @@
-// Produkte und Warenkorb speichern
+// Arrays zum Speichern aller geladenen Produkte
+// und aller Produkte im Warenkorb
 let products = [];
 let cart = [];
 
-// Elemente aus dem DOM
+
+// Holt wichtige Bereiche aus dem HTML,
+// damit später Inhalte eingefügt werden können
 const productsWrapper = document.querySelector(".products-wrapper");
 const cartWrapper = document.querySelector(".products-in-cart");
 
 
-// ===============================
-// PRODUKTE LADEN
-// ===============================
+
+// Lädt die Daten aus der products.json Datei
+// Verwendet fetch() mit async/await
+// Relevant für:
+// - Angabe 1
+// - Angabe 2
+// - Angabe 3
 async function loadProducts()
 {
-    const response = await fetch("./products.json");
-
-    const data = await response.json();
-
-    data.forEach(productData =>
+    try
     {
-        // Nur gewünschte Kategorien anzeigen
-        if (
-        productData.category === "Kleidung" ||
-        productData.category === "Möbel" ||
-        productData.category === "Handarbeit"
-        )
-        {
-            products.push(productData);
+        // products.json laden
+        const response = await fetch("./products.json");
 
-            createProductCard(productData);
-        }
-    });
+        // JSON Daten in JavaScript Objekt umwandeln
+        const data = await response.json();
+
+
+
+        // Durchläuft jedes Produkt aus der JSON Datei
+        data.forEach(product =>
+        {
+
+            // ==================================================
+            // KATEGORIEN FILTER
+            // ==================================================
+
+            // ANGABE 1:
+            // Kleidung, Handarbeit, Tech
+
+            // ANGABE 2:
+            // Möbel, Handarbeit, Kleidung
+
+            // ANGABE 3:
+            // Nur Tech
+
+            if (
+                product.category === "Kleidung" ||
+                product.category === "Handarbeit" ||
+                product.category === "Tech"
+            )
+            {
+                // Produkt im products Array speichern
+                products.push(product);
+
+                // Produktkarte im HTML anzeigen
+                createProductCard(product);
+            }
+        });
+
+
+
+        // Gesamtanzahl aller Produkte anzeigen
+        // Relevant für:
+        // - Angabe 1
+        // - Angabe 2
+        showTotalShopProducts();
+    }
+    catch(error)
+    {
+        console.error("Fehler beim Laden:", error);
+    }
 }
 
-// Produkte laden
+
+// Startet das Laden der Produkte
 loadProducts();
 
-// ===============================
-// PRODUKTKARTE ERSTELLEN
-// ===============================
+
+
+// Erstellt eine einzelne Produktkarte
+// und fügt sie im Shop ein
+// Relevant für:
+// - Angabe 1
+// - Angabe 2
+// - Angabe 3
 function createProductCard(product)
 {
-    const productDiv = document.createElement("div");
-    productDiv.classList.add("product");
+    // Äußere Produktkarte erstellen
+    const productCard = document.createElement("div");
+
+    productCard.classList.add("product");
 
 
 
-    // Bild
+    // ==================================================
+    // PRODUKTBILD
+    // ==================================================
+
+    // Bild Element erstellen
     const img = document.createElement("img");
 
-    img.src = "." + product.image + ".jpg";
+
+
+    // ==================================================
+    // BILDPFAD
+    // ==================================================
+
+    // ANGABE 1:
+    // product.image enthält bereits den kompletten Pfad
+    // Beispiel:
+    // /images/laptop.png
+
+    // ANGABE 2:
+    // product.image enthält KEINE Dateiendung
+    // Deshalb muss .jpg oder .png ergänzt werden
+
+    // ANGABE 3:
+    // product.image enthält ebenfalls bereits den Pfad
+
+    img.src = "." + product.image;
+
+
+
+    // ==================================================
+    // RESPONSIVE IMAGES MIT SRCSET
+    // ==================================================
+
+    // Relevant für:
+    // - Angabe 1
+    // - Angabe 2
+    // - Angabe 3
+
+    // Je nach Bildschirmgröße wird automatisch
+    // eine passende Bildgröße geladen
 
     img.srcset = `
-        .${product.image}-480w.jpg 480w,
-        .${product.image}-768w.jpg 768w,
-        .${product.image}-1200w.jpg 1200w
+        .${product.image}-480w.png 480w,
+        .${product.image}-768w.png 768w,
+        .${product.image}-1200w.png 1200w
     `;
 
-    img.sizes = "(max-width: 768px) 100vw, 250px";
+    // Definiert wann welche Bildgröße verwendet wird
+    img.sizes = "(max-width: 768px) 100vw, 300px";
+
+    // Alternativtext für Barrierefreiheit
+    img.alt = product.name;
 
 
 
-    // Titel
+    // ==================================================
+    // PRODUKTNAME
+    // ==================================================
+
     const title = document.createElement("h3");
-    title.innerText = product.name;
+
+    // textContent verhindert XSS Angriffe
+    // Relevant besonders für Angabe 3
+    title.textContent = product.name;
 
 
 
-    // Beschreibung
+    // ==================================================
+    // PRODUKTBESCHREIBUNG
+    // ==================================================
+
+    // Relevant für:
+    // - Angabe 1
+    // - Angabe 3
+
+    // Angabe 2 benötigt keine Beschreibung
+
     const description = document.createElement("p");
+
     description.classList.add("product-description");
-    description.innerText = product.description;
+
+    description.textContent = product.description;
 
 
 
-    // Preis
+    // ==================================================
+    // PRODUKTPREIS
+    // ==================================================
+
     const price = document.createElement("p");
+
     price.classList.add("product-price");
-    price.innerText = Number(product.price).toFixed(2) + " €";
 
-    // Button
+    // Preis in Zahl umwandeln
+    // und immer mit 2 Nachkommastellen anzeigen
+    price.textContent =
+        parseFloat(product.price).toFixed(2) + " €";
+
+
+
+    // ==================================================
+    // ADD TO CART BUTTON
+    // ==================================================
+
     const button = document.createElement("button");
-    button.innerText = "Add to cart";
 
+    button.textContent = "Add to cart";
+
+
+
+    // Klick Event:
+    // Fügt das Produkt dem Warenkorb hinzu
     button.addEventListener("click", () =>
     {
         addToCart(product.id);
@@ -89,112 +214,212 @@ function createProductCard(product)
 
 
 
-    // Alles anhängen
-    productDiv.appendChild(img);
-    productDiv.appendChild(title);
-    productDiv.appendChild(description);
-    productDiv.appendChild(price);
-    productDiv.appendChild(button);
+    // ==================================================
+    // ELEMENTE ZUR PRODUKTKARTE HINZUFÜGEN
+    // ==================================================
 
-    productsWrapper.appendChild(productDiv);
+    productCard.appendChild(img);
+
+    productCard.appendChild(title);
+
+    productCard.appendChild(description);
+
+    productCard.appendChild(price);
+
+    productCard.appendChild(button);
+
+
+
+    // Produktkarte im Shop anzeigen
+    productsWrapper.appendChild(productCard);
 }
 
 
 
-// ===============================
-// ZUM WARENKORB HINZUFÜGEN
-// ===============================
+// Zeigt die Gesamtanzahl aller Produkte im Shop an
+// Relevant für:
+// - Angabe 1
+// - Angabe 2
+function showTotalShopProducts()
+{
+    // Neues Textelement erstellen
+    const totalProducts = document.createElement("p");
+
+    // Anzahl der Produkte anzeigen
+    totalProducts.textContent =
+        `Produkte im Shop: ${products.length}`;
+
+    // Vor dem Shopbereich einfügen
+    productsWrapper.before(totalProducts);
+}
+
+
+
+// Fügt ein Produkt dem Warenkorb hinzu
+// Relevant für:
+// - Angabe 1
+// - Angabe 2
+// - Angabe 3
 function addToCart(id)
 {
-    const product = products.find(product => product.id === id);
+    // Passendes Produkt anhand der ID suchen
+    const product =
+        products.find(product => product.id === id);
 
+
+
+    // Produkt im cart Array speichern
     cart.push(product);
 
 
 
-    // Listenelement
+    // ==================================================
+    // WARENKORB EINTRAG ERSTELLEN
+    // ==================================================
+
     const li = document.createElement("li");
 
 
 
-    // Name
+    // ==================================================
+    // PRODUKTNAME IM WARENKORB
+    // ==================================================
+
     const name = document.createElement("span");
+
     name.classList.add("product-name");
-    name.innerText = product.name;
+
+    name.textContent = product.name;
 
 
 
-    // Preis
+    // ==================================================
+    // PREIS IM WARENKORB
+    // ==================================================
+
     const price = document.createElement("span");
-    price.innerText = Number(product.price).toFixed(2) + " €";
+
+    price.textContent =
+        parseFloat(product.price).toFixed(2) + " €";
 
 
 
-    // Entfernen Button
-    const remove = document.createElement("span");
-    remove.classList.add("cancel-order-button");
-    remove.innerText = "x";
+    // ==================================================
+    // REMOVE BUTTON
+    // ==================================================
 
-    remove.addEventListener("click", () =>
+    // Klick auf x entfernt Produkt wieder
+    // Relevant für:
+    // - Angabe 1
+    // - Angabe 2
+    // - Angabe 3
+
+    const removeButton = document.createElement("span");
+
+    removeButton.classList.add("cancel-order-button");
+
+    removeButton.textContent = "x";
+
+
+
+    // Klick Event zum Entfernen
+    removeButton.addEventListener("click", () =>
     {
         removeFromCart(li, product);
     });
 
 
 
+    // Inhalte zum Listenpunkt hinzufügen
     li.appendChild(name);
-    li.appendChild(price);
-    li.appendChild(remove);
 
+    li.appendChild(price);
+
+    li.appendChild(removeButton);
+
+
+
+    // Listenpunkt im Warenkorb anzeigen
     cartWrapper.appendChild(li);
 
 
 
+    // Warenkorb Informationen aktualisieren
     updateCart();
 }
 
-// ===============================
-// AUS WARENKORB ENTFERNEN
-// ===============================
+
+
+// Entfernt ein Produkt aus dem Warenkorb
+// Relevant für:
+// - Angabe 1
+// - Angabe 2
+// - Angabe 3
 function removeFromCart(li, product)
 {
+    // HTML Element entfernen
     li.remove();
 
+
+
+    // Produkt aus dem cart Array entfernen
     const index = cart.indexOf(product);
 
-    if (index > -1)
+    if(index > -1)
     {
         cart.splice(index, 1);
     }
 
+
+
+    // Warenkorb neu berechnen
     updateCart();
 }
 
 
 
-// ===============================
-// WARENKORB AKTUALISIEREN
-// ===============================
+// Aktualisiert Anzahl und Gesamtpreis
+// des Warenkorbs
+// Relevant für:
+// - Angabe 2
+// - Angabe 3
 function updateCart()
 {
-    // Anzahl
-    document.querySelector(".total-products-count").innerText =
-        cart.length;
+    // ==================================================
+    // GESAMTANZAHL DER PRODUKTE
+    // ==================================================
+
+    // Anzahl aller Produkte im Warenkorb anzeigen
+    const totalProductsCount =
+        document.querySelector(".total-products-count");
+
+    totalProductsCount.textContent = cart.length;
 
 
 
-    // Gesamtpreis
+    // ==================================================
+    // GESAMTPREIS BERECHNEN
+    // ==================================================
+
+    // Relevant für:
+    // - Angabe 3
+
     let totalPrice = 0;
 
+
+
+    // Alle Preise im Warenkorb addieren
     cart.forEach(product =>
     {
-        totalPrice += Number(product.price);
+        totalPrice += parseFloat(product.price);
     });
 
-    document.querySelector(".total-price").innerText =
+
+
+    // Gesamtpreis im HTML anzeigen
+    const totalPriceElement =
+        document.querySelector(".total-price");
+
+    totalPriceElement.textContent =
         totalPrice.toFixed(2) + " €";
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const marketplaceWrapper = document.getElementById(".marketplace-wrapper");
-})
