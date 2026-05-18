@@ -1,142 +1,162 @@
-{
-    "1": {
+[
+    {
+        "id": 1,
         "name": "Lederjacke, schwarz",
         "description": "Schwarze Lederjacke, enger Schnitt, Details in silber.",
-        "price": 85.99,
+        "price": "85.99",
         "image": "/images/black-leather-jacket",
         "category": "Kleidung"
     },
-    "2": {
+    {
+        "id": 2,
         "name": "Ledercouch, braun",
         "description": "Braune Couch aus Leder",
-        "price": 399.99,
+        "price": "399.99",
         "image": "/images/brown-leather-couch",
         "category": "Möbel"
     },
-    "3": {
+    {
+        "id": 3,
         "name": "Avocado mit Googly Eyes",
         "description": "Avocado mit Augen!",
-        "price": 7.99,
+        "price": "7.99",
         "image": "/images/avocado",
         "category": "Handarbeit"
     },
-    "4": {
+    {
+        "id": 4,
         "name": "Laptop",
         "description": "Laptop, 13 Zoll",
-        "price": 2300,
+        "price": "2300",
         "image": "/images/laptop",
         "category": "Tech"
     },
-    "5": {
+    {
+        "id": 5,
         "name": "Sneaker, schwarz",
         "description": "Sneaker im Skater-Stil, schwarz mit weißen Details.",
-        "price": 65.99,
+        "price": "65.99",
         "image": "/images/black-white-shoes",
         "category": "Kleidung"
     },
-    "6": {
+    {
+        "id": 6,
         "name": "Schuhe, bunt",
         "description": "Sneaker, blau-weiß mit orangen Details, auffälliger Stil.",
-        "price": 75.99,
+        "price": "75.99",
         "image": "/images/blue-orange-shoes",
         "category": "Kleidung"
     },
-    "7": {
+    {
+        "id": 7,
         "name": "Smartphone, Xaiomi",
-        "description": "Mir fällt keine Beschreibung mehr ein. Handy halt.",
-        "price": 499.99,
+        "description": "Mir fällt keine Beschreibung ein. Handy halt.",
+        "price": "499.99",
         "image": "/images/phone",
         "category": "Tech"
     },
-    "8": {
+    {
+        "id": 8,
         "name": "Qualle",
         "description": "Bestimmt sehr weich",
-        "price": 12.55,
+        "price": "12.55",
         "image": "/images/qualle",
         "category": "Handarbeit"
     },
-    "9": {
+    {
+        "id": 9,
         "name": "Jeansjacke, blau",
         "description": "Blaue Jeansjacke mit weißem Kunstfell am Kragen.",
-        "price": 125.99,
+        "price": "125.99",
         "image": "/images/jeans-jacket",
         "category": "Kleidung"
     },
-    "10": {
+    {
+        "id": 10,
         "name": "Beistelltisch",
         "description": "Beistelltisch aus Holz",
-        "price": 259.99,
+        "price": "259.99",
         "image": "/images/nightstand",
         "category": "Möbel"
     },
-    "11": {
+    {
+        "id": 11,
         "name": "Gehäkelter Granny Square",
         "description": "Quadratisch praktisch gut.",
-        "price": 10.95,
+        "price": "10.95",
         "image": "/images/granny-square",
         "category": "Handarbeit"
     },
-    "12": {
+    {
+        "id": 12,
         "name": "Over-Ear Kopfhörer",
         "description": "Schwarze Over-Ear Kopfhörer",
-        "price": 125.99,
+        "price": "125.99",
         "image": "/images/headphones",
         "category": "Tech"
     },
-    "13": {
+    {
+        "id": 13,
         "name": "Maxirock, gelb",
         "description": "Langer gelber Rock mit weißem Karomuster. Weiter Schnitt.",
-        "price": 125.99,
+        "price": "125.99",
         "image": "/images/yellow-plaid-skirt",
         "category": "Kleidung"
     },
-    "14": {
+    {
+        "id": 14,
         "name": "Halbes Relaxo",
         "description": "3D-Stift Experiment",
-        "price": 15.99,
+        "price": "15.99",
         "image": "/images/halbes-relaxo",
         "category": "Handarbeit"
     },
-    "15": {
+    {
+        "id": 15,
         "name": "Couch, grün",
         "description": "Grüne Couch",
-        "price": 259.99,
+        "price": "259.99",
         "image": "/images/green-couch",
         "category": "Möbel"
     },
-    "16": {
+    {
+        "id": 16,
         "name": "Stuhl, gelb",
         "description": "Gelber Stuhl",
-        "price": 199.99,
+        "price": "199.99",
         "image": "/images/yellow-chair",
         "category": "Möbel"
     },
-    "17": {
+    {
+        "id": 17,
         "name": "VR Brille",
         "description": "VR Brille",
-        "price": 259.99,
+        "price": "259.99",
         "image": "/images/oculus-quest",
         "category": "Tech"
     },
-    "18": {
+    {
+        "id": 18,
         "name": "Raspberry Pi",
         "description": "Raspberry Pi",
-        "price": 259.99,
+        "price": "259.99",
         "image": "/images/raspberry-pi",
         "category": "Möbel"
     },
-    "19": {
+    {
+        "id": 19,
         "name": "Katze",
         "description": "Miau",
-        "price": 29.99,
-        "image": "/images/katze",
+        "price": "29.99",
+        "image": "/images/Katze",
         "category": "Handarbeit"
     },
-    "20": {
+    {
+        "id": 20,
         "name": "Handgemachter Blumentopf",
         "description": "Sterben nicht so schnell :)",
-        "price": 25.99,
+        "price": "25.99",
         "image": "/images/blumentopf",
         "category": "Handarbeit"
     }
-}
+]

@@ -25,7 +25,7 @@
 ### 1. Produktdaten laden und richtig darstellen
     - Lade die Produktdaten aus products.json. Verwende fetch() und async/await.
     - Stelle die Produkte jeweils in einer Produktkarte dar. HTML & CSS dafür sind bereits angelegt. Inkludiere folgende Informationen: Name des Produkts, Preis, Bild, Button "Add to cart"
-    - Zeige **NUR** die Produkte in den Kategorien "Tech", "Möbel" und "Handarbeit"
+     - Zeige **NUR** die Produkte in den Kategorien "Möbel", "Handarbeit" und "Kleidung"
 
     - products.json gibt ein Array zurück, das mit Produktobjekten gefüllt ist. Die Struktur dafür sieht so aus:
     `{
@@ -33,11 +33,11 @@
         "name": "Produktname",
         "description": "Das ist eine Produktbeschreibung.",
         "price": 25.99,
-        "image": "/images/product.png",
+        "image": "product",
         "category": "Schmuck"
     }`
 
-    - Achtung: Bei den Bildern sind keine Dateiendungen dabei. Füge sie im Code selbst an.
+    - Achtung: Bei den Bildern sind keine Dateiendungen dabei. Füge sie im Code selbst ein.
 
 ### 2. Warenkorb-Funktionalität
     - Produkte können mehrmals zum Warenkorb hinzugefügt werden. Zeige sie in dem Fall einfach mehrmals an. Du musst nicht extra einen Counter pro Produkt anzeigen.
@@ -46,8 +46,7 @@
     - Produkte, die sich bereits im Warenkorb befinden können auch wieder entfernt werden, indem man auf das "x" klickt. 
 
 ### 3. Informationen berechnen & Responsive Images
-    - Berechne die Gesamtsumme aller Produkte, die sich im Warenkorb befinden und zeige sie richtig im Warenkorb an.
-    - Gib die Gesamtanzahl aller Artikel aus, die sich im Warenkorb befinden. 
+     - Gib die Gesamtanzahl aller Artikel aus, die im Shop angezeigt werden. 
     - Responsive Images in den Produktkarten. Verwende dafür srcset.
 
 
@@ -57,5 +56,3 @@
 * Nutze async/await korrekt für fetch()
 * Achte darauf, Funktionen und Variablen verständlich zu benennen. In englischer Sprache.
 * number.toFixed(n) gibt eine Zahl mit maximal n Kommastellen aus.
-* parseInt() um einen String in einen Integer umzuwandeln
-* 
