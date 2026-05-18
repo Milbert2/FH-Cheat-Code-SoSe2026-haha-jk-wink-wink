@@ -120,7 +120,7 @@ function createProductCard(product)
     // ANGABE 3:
     // product.image enthält ebenfalls bereits den Pfad
 
-    img.src = "." + product.image;
+    img.src = "." + product.image + ".jpg";
 
 
 
@@ -137,17 +137,13 @@ function createProductCard(product)
     // eine passende Bildgröße geladen
 
     img.srcset = `
-        .${product.image}-480w.png 480w,
-        .${product.image}-768w.png 768w,
-        .${product.image}-1200w.png 1200w
+        .${product.image}-480w.jpg 480w,
+        .${product.image}-768w.jpg 768w,
+        .${product.image}-1200w.jpg 1200w
     `;
 
     // Definiert wann welche Bildgröße verwendet wird
     img.sizes = "(max-width: 768px) 100vw, 300px";
-
-    // Alternativtext für Barrierefreiheit
-    img.alt = product.name;
-
 
 
     // ==================================================
