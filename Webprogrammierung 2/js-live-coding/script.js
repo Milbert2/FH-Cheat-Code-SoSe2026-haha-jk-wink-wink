@@ -1,302 +1,451 @@
-// Arrays zum Speichern aller geladenen Produkte
-// und aller Produkte im Warenkorb
+// Wartet bis das komplette HTML geladen wurde.
+// Erst DANACH wird die Funktion init() gestartet.
+//
+// document
+// = die gesamte HTML Seite
+//
+// addEventListener()
+// = hört auf ein Event
+//
+// "DOMContentLoaded"
+// = Event das ausgelöst wird,
+//   sobald das HTML fertig geladen ist
+document.addEventListener("DOMContentLoaded", () =>
+{
+    init();
+});
+
+
+
+// ==================================================
+// ARRAYS
+// ==================================================
+
+// Array für alle Produkte aus der JSON Datei
+//
+// let
+// = Variable die später verändert werden darf
+//
+// []
+// = leeres Array
 let products = [];
+
+
+
+// Array für Produkte im Warenkorb
 let cart = [];
 
 
-// Holt wichtige Bereiche aus dem HTML,
-// damit später Inhalte eingefügt werden können
-const productsWrapper = document.querySelector(".products-wrapper");
-const cartWrapper = document.querySelector(".products-in-cart");
+
+// ==================================================
+// HTML ELEMENTE HOLEN
+// ==================================================
+
+// Sucht das HTML Element mit der Klasse
+// ".products-wrapper"
+//
+// document.querySelector()
+// = sucht ein HTML Element
+//
+// ".products-wrapper"
+// = CSS Klassenname
+//
+// Das Element wird später verwendet,
+// um die Produktkarten einzufügen
+const productsWrapper =
+    document.querySelector(".products-wrapper");
 
 
 
-// Lädt die Daten aus der products.json Datei
-// Verwendet fetch() mit async/await
-// Relevant für:
-// - Angabe 1
-// - Angabe 2
-// - Angabe 3
+// Holt die Warenkorb Liste aus dem HTML
+const cartWrapper =
+    document.querySelector(".products-in-cart");
+
+
+
+// Holt das Element für die Anzahl
+// der Produkte im Warenkorb
+const totalProductsCount =
+    document.querySelector(".total-products-count");
+
+
+
+// Holt das Element für den Gesamtpreis
+const totalPrice =
+    document.querySelector(".total-price");
+
+
+
+// ==================================================
+// INIT
+// ==================================================
+
+// async
+// = erlaubt die Verwendung von await
+//
+// init()
+// = Startfunktion der App
+//
+// Wird einmal beim Laden der Seite ausgeführt
+async function init()
+{
+    // Wartet bis Produkte geladen wurden
+    //
+    // await
+    // = wartet bis Promise fertig ist
+    await loadProducts();
+}
+
+
+
+// ==================================================
+// PRODUKTE LADEN
+// ==================================================
+
+// Lädt die JSON Datei mit fetch()
+async function loadProducts()
+{
+    // fetch()
+    // = lädt Daten von einer Datei oder API
+    //
+    // "./products.json"
+    // = Datei im selben Ordner
+    const response =
+        await fetch("./products.json");
+
+
+
+    // response.json()
+    // = wandelt JSON in JavaScript Objekte um
+    //
+    // data enthält danach ein Array
+    // mit allen Produkten
+    const data =
+        await response.json();
+
+
+
+    // forEach()
+    // = läuft durch jedes Element im Array
+    //
+    // product
+    // = aktuelles Produkt
+    data.forEach(product =>
+    {
+        // Nur bestimmte Kategorien anzeigen
+        //
+        // ||
+        // = ODER
+        //
+        // Wenn eine Bedingung true ist,
+        // wird das Produkt angezeigt
+        if(
+            product.category === "Kleidung" ||
+            product.category === "Handarbeit" ||
+            product.category === "Tech"
+        )
+        {
+            // Produkt im products Array speichern
+            //
+            // push()
+            // = Element zu Array hinzufügen
+            products.push(product);
+
+
+
+            // Produktkarte erstellen
+            createProduct(product);
+        }
+    });
+
+
+
+    // ==================================================
+    // PRODUKTANZAHL IM SHOP ANZEIGEN
+    // ==================================================
+
+    // Neues HTML Element erstellen
+    const count =
+        document.createElement("p");
+
+
+
+    // textContent
+    // = Text in Element schreiben
+    //
+    // `${}`
+    // = JavaScript Wert in String einsetzen
+    count.textContent =
+        `Produkte im Shop: ${products.length}`;
+
+
+
+    // before()
+    // = Element vor einem anderen Element einfügen
+    productsWrapper.before(count);
+}
+
+/* Verwendet Backend aus dem Web statt JSON File 
+
 async function loadProducts()
 {
     try
     {
-        // products.json laden
-        const response = await fetch("./products.json");
+        // Daten von einer externen API holen
+        const response =
+            await fetch("https://example.com/api/products");
 
-        // JSON Daten in JavaScript Objekt umwandeln
-        const data = await response.json();
+        // Antwort in JS-Objekt umwandeln
+        const data =
+            await response.json();
 
 
 
-        // Durchläuft jedes Produkt aus der JSON Datei
         data.forEach(product =>
         {
-
-            // ==================================================
-            // KATEGORIEN FILTER
-            // ==================================================
-
-            // ANGABE 1:
-            // Kleidung, Handarbeit, Tech
-
-            // ANGABE 2:
-            // Möbel, Handarbeit, Kleidung
-
-            // ANGABE 3:
-            // Nur Tech
-
-            if (
+            if(
                 product.category === "Kleidung" ||
                 product.category === "Handarbeit" ||
                 product.category === "Tech"
             )
             {
-                // Produkt im products Array speichern
                 products.push(product);
 
-                // Produktkarte im HTML anzeigen
-                createProductCard(product);
+                createProduct(product);
             }
         });
 
 
 
-        // Gesamtanzahl aller Produkte anzeigen
-        // Relevant für:
-        // - Angabe 1
-        // - Angabe 2
-        showTotalShopProducts();
+        // Anzahl anzeigen
+        const count =
+            document.createElement("p");
+
+        count.textContent =
+            `Produkte im Shop: ${products.length}`;
+
+        productsWrapper.before(count);
     }
     catch(error)
     {
-        console.error("Fehler beim Laden:", error);
+        console.error("Fehler beim Laden der API:", error);
     }
 }
+    */
 
+// ==================================================
+// PRODUKTKARTE ERSTELLEN
+// ==================================================
 
-// Startet das Laden der Produkte
-loadProducts();
-
-
-
-// Erstellt eine einzelne Produktkarte
-// und fügt sie im Shop ein
-// Relevant für:
-// - Angabe 1
-// - Angabe 2
-// - Angabe 3
-function createProductCard(product)
+// Erstellt eine Produktkarte für EIN Produkt
+function createProduct(product)
 {
-    // Äußere Produktkarte erstellen
-    const productCard = document.createElement("div");
-
-    productCard.classList.add("product");
-
-
-
-    // ==================================================
-    // PRODUKTBILD
-    // ==================================================
-
-    // Bild Element erstellen
-    const img = document.createElement("img");
+    // Neues div erstellen
+    const div =
+        document.createElement("div");
 
 
 
     // ==================================================
-    // BILDPFAD
+    // BILD
     // ==================================================
 
-    // ANGABE 1:
-    // product.image enthält bereits den kompletten Pfad
-    // Beispiel:
-    // /images/laptop.png
+    // img Element erstellen
+    const img =
+        document.createElement("img");
 
-    // ANGABE 2:
-    // product.image enthält KEINE Dateiendung
-    // Deshalb muss .jpg oder .png ergänzt werden
 
-    // ANGABE 3:
-    // product.image enthält ebenfalls bereits den Pfad
 
-    img.src = "." + product.image + ".jpg";
+    // src
+    // = Bildpfad
+    //
+    // "." davor:
+    // macht aus:
+    // /images/laptop
+    //
+    // => ./images/laptop
+    //
+    // + ".jpg"
+    // ergänzt die Dateiendung
+    img.src =
+        "." + product.image + ".jpg";
 
 
 
     // ==================================================
-    // RESPONSIVE IMAGES MIT SRCSET
+    // RESPONSIVE IMAGES
     // ==================================================
 
-    // Relevant für:
-    // - Angabe 1
-    // - Angabe 2
-    // - Angabe 3
-
-    // Je nach Bildschirmgröße wird automatisch
-    // eine passende Bildgröße geladen
-
+    // srcset
+    // = verschiedene Bildgrößen
+    //
+    // Browser entscheidet automatisch,
+    // welches Bild geladen wird
     img.srcset = `
         .${product.image}-480w.jpg 480w,
         .${product.image}-768w.jpg 768w,
         .${product.image}-1200w.jpg 1200w
     `;
 
-    // Definiert wann welche Bildgröße verwendet wird
-    img.sizes = "(max-width: 768px) 100vw, 300px";
 
 
-    // ==================================================
-    // PRODUKTNAME
-    // ==================================================
-
-    const title = document.createElement("h3");
-
-    // textContent verhindert XSS Angriffe
-    // Relevant besonders für Angabe 3
-    title.textContent = product.name;
+    // sizes
+    // = sagt dem Browser wie groß
+    // das Bild ungefähr angezeigt wird
+    img.sizes =
+        "(max-width: 768px) 100vw, 300px";
 
 
 
     // ==================================================
-    // PRODUKTBESCHREIBUNG
+    // NAME
     // ==================================================
 
-    // Relevant für:
-    // - Angabe 1
-    // - Angabe 3
+    // h3 Überschrift erstellen
+    const title =
+        document.createElement("h3");
 
-    // Angabe 2 benötigt keine Beschreibung
 
-    const description = document.createElement("p");
 
-    description.classList.add("product-description");
-
-    description.textContent = product.description;
+    // Produktname einsetzen
+    title.textContent =
+        product.name;
 
 
 
     // ==================================================
-    // PRODUKTPREIS
+    // BESCHREIBUNG
     // ==================================================
 
-    const price = document.createElement("p");
+    const description =
+        document.createElement("p");
 
-    price.classList.add("product-price");
 
-    // Preis in Zahl umwandeln
-    // und immer mit 2 Nachkommastellen anzeigen
+
+    // Produktbeschreibung anzeigen
+    description.textContent =
+        product.description;
+
+
+
+    // ==================================================
+    // PREIS
+    // ==================================================
+
+    const price =
+        document.createElement("p");
+
+
+
+    // parseFloat()
+    // = String in Zahl umwandeln
+    //
+    // toFixed(2)
+    // = immer 2 Nachkommastellen
+    //
+    // Beispiel:
+    // 25 => 25.00
     price.textContent =
-        parseFloat(product.price).toFixed(2) + " €";
+        parseFloat(product.price)
+            .toFixed(2) + " €";
 
 
 
     // ==================================================
-    // ADD TO CART BUTTON
+    // BUTTON
     // ==================================================
 
-    const button = document.createElement("button");
-
-    button.textContent = "Add to cart";
-
+    const button =
+        document.createElement("button");
 
 
-    // Klick Event:
-    // Fügt das Produkt dem Warenkorb hinzu
+
+    // Text auf Button
+    button.textContent =
+        "Add to cart";
+
+
+
+    // EventListener für Klick
+    //
+    // Wenn geklickt wird:
+    // addToCart(product)
     button.addEventListener("click", () =>
     {
-        addToCart(product.id);
+        addToCart(product);
     });
 
 
 
     // ==================================================
-    // ELEMENTE ZUR PRODUKTKARTE HINZUFÜGEN
+    // ALLES ZUR KARTE HINZUFÜGEN
     // ==================================================
 
-    productCard.appendChild(img);
+    // appendChild()
+    // = HTML Element in anderes Element einfügen
+    div.appendChild(img);
 
-    productCard.appendChild(title);
+    div.appendChild(title);
 
-    productCard.appendChild(description);
+    div.appendChild(description);
 
-    productCard.appendChild(price);
+    div.appendChild(price);
 
-    productCard.appendChild(button);
+    div.appendChild(button);
 
 
 
-    // Produktkarte im Shop anzeigen
-    productsWrapper.appendChild(productCard);
+    // Produktkarte im HTML anzeigen
+    productsWrapper.appendChild(div);
 }
 
 
 
-// Zeigt die Gesamtanzahl aller Produkte im Shop an
-// Relevant für:
-// - Angabe 1
-// - Angabe 2
-function showTotalShopProducts()
+// ==================================================
+// PRODUKT ZUM WARENKORB
+// ==================================================
+
+function addToCart(product)
 {
-    // Neues Textelement erstellen
-    const totalProducts = document.createElement("p");
-
-    // Anzahl der Produkte anzeigen
-    totalProducts.textContent =
-        `Produkte im Shop: ${products.length}`;
-
-    // Vor dem Shopbereich einfügen
-    productsWrapper.before(totalProducts);
-}
-
-
-
-// Fügt ein Produkt dem Warenkorb hinzu
-// Relevant für:
-// - Angabe 1
-// - Angabe 2
-// - Angabe 3
-function addToCart(id)
-{
-    // Passendes Produkt anhand der ID suchen
-    const product =
-        products.find(product => product.id === id);
-
-
-
     // Produkt im cart Array speichern
     cart.push(product);
 
 
 
-    // ==================================================
-    // WARENKORB EINTRAG ERSTELLEN
-    // ==================================================
-
-    const li = document.createElement("li");
+    // Neues Listenelement erstellen
+    const li =
+        document.createElement("li");
 
 
 
     // ==================================================
-    // PRODUKTNAME IM WARENKORB
+    // NAME
     // ==================================================
 
-    const name = document.createElement("span");
+    const name =
+        document.createElement("span");
 
-    name.classList.add("product-name");
 
-    name.textContent = product.name;
+
+    // Produktname anzeigen
+    name.textContent =
+        product.name;
 
 
 
     // ==================================================
-    // PREIS IM WARENKORB
+    // PREIS
     // ==================================================
 
-    const price = document.createElement("span");
+    const price =
+        document.createElement("span");
 
+
+
+    // Preis anzeigen
     price.textContent =
-        parseFloat(product.price).toFixed(2) + " €";
+        parseFloat(product.price)
+            .toFixed(2) + " €";
 
 
 
@@ -304,92 +453,88 @@ function addToCart(id)
     // REMOVE BUTTON
     // ==================================================
 
-    // Klick auf x entfernt Produkt wieder
-    // Relevant für:
-    // - Angabe 1
-    // - Angabe 2
-    // - Angabe 3
-
-    const removeButton = document.createElement("span");
-
-    removeButton.classList.add("cancel-order-button");
-
-    removeButton.textContent = "x";
+    const remove =
+        document.createElement("span");
 
 
 
-    // Klick Event zum Entfernen
-    removeButton.addEventListener("click", () =>
+    // x anzeigen
+    remove.textContent = "x";
+
+
+
+    // Klick auf x
+    remove.addEventListener("click", () =>
     {
-        removeFromCart(li, product);
+        // HTML Element entfernen
+        li.remove();
+
+
+
+        // indexOf()
+        // = findet Position im Array
+        const index =
+            cart.indexOf(product);
+
+
+
+        // splice()
+        // = entfernt Element aus Array
+        //
+        // splice(start, anzahl)
+        //
+        // Beispiel:
+        // splice(2,1)
+        // = entferne 1 Element ab Position 2
+        cart.splice(index, 1);
+
+
+
+        // Warenkorb neu berechnen
+        updateCart();
     });
 
 
 
-    // Inhalte zum Listenpunkt hinzufügen
+    // ==================================================
+    // ELEMENTE ZUSAMMENBAUEN
+    // ==================================================
+
     li.appendChild(name);
 
     li.appendChild(price);
 
-    li.appendChild(removeButton);
+    li.appendChild(remove);
 
 
 
-    // Listenpunkt im Warenkorb anzeigen
+    // Produkt im Warenkorb anzeigen
     cartWrapper.appendChild(li);
 
 
 
-    // Warenkorb Informationen aktualisieren
+    // Warenkorb aktualisieren
     updateCart();
 }
 
 
 
-// Entfernt ein Produkt aus dem Warenkorb
-// Relevant für:
-// - Angabe 1
-// - Angabe 2
-// - Angabe 3
-function removeFromCart(li, product)
-{
-    // HTML Element entfernen
-    li.remove();
+// ==================================================
+// WARENKORB AKTUALISIEREN
+// ==================================================
 
-
-
-    // Produkt aus dem cart Array entfernen
-    const index = cart.indexOf(product);
-
-    if(index > -1)
-    {
-        cart.splice(index, 1);
-    }
-
-
-
-    // Warenkorb neu berechnen
-    updateCart();
-}
-
-
-
-// Aktualisiert Anzahl und Gesamtpreis
-// des Warenkorbs
-// Relevant für:
-// - Angabe 2
-// - Angabe 3
 function updateCart()
 {
     // ==================================================
-    // GESAMTANZAHL DER PRODUKTE
+    // ANZAHL AKTUALISIEREN
     // ==================================================
 
-    // Anzahl aller Produkte im Warenkorb anzeigen
-    const totalProductsCount =
-        document.querySelector(".total-products-count");
-
-    totalProductsCount.textContent = cart.length;
+    // Anzahl der Produkte im Warenkorb anzeigen
+    //
+    // cart.length
+    // = Anzahl Elemente im Array
+    totalProductsCount.textContent =
+        cart.length;
 
 
 
@@ -397,25 +542,22 @@ function updateCart()
     // GESAMTPREIS BERECHNEN
     // ==================================================
 
-    // Relevant für:
-    // - Angabe 3
-
-    let totalPrice = 0;
+    // Variable für Gesamtsumme
+    let sum = 0;
 
 
 
-    // Alle Preise im Warenkorb addieren
+    // Alle Produkte im Warenkorb durchlaufen
     cart.forEach(product =>
     {
-        totalPrice += parseFloat(product.price);
+        // Preis addieren
+        sum +=
+            parseFloat(product.price);
     });
 
 
 
-    // Gesamtpreis im HTML anzeigen
-    const totalPriceElement =
-        document.querySelector(".total-price");
-
-    totalPriceElement.textContent =
-        totalPrice.toFixed(2) + " €";
+    // Gesamtpreis anzeigen
+    totalPrice.textContent =
+        sum.toFixed(2) + " €";
 }
