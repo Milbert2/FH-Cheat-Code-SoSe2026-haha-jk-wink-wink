@@ -1,0 +1,122 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    padding: 1rem;
+}
+
+h1 {
+    text-align: center;
+    background-color: cornflowerblue;
+    padding: 1rem 0rem;
+}
+
+#penguins-wrapper, #selected-penguins-wrapper {
+    display: grid;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    #penguins-wrapper, #selected-penguins-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    #penguins-wrapper, #selected-penguins-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    #penguins-wrapper, #selected-penguins-wrapper {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.penguin-card {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid cornflowerblue;
+    border-radius: 5px;
+}
+
+.penguin-card h2 {
+    min-height: 2rem;
+    padding: 0 1rem;
+    margin: 2rem 0 0 0;
+}
+
+.penguin-card img {
+    width: 100%;
+    height: auto;
+}
+
+.penguin-card p {
+    padding: 0rem 1rem;
+    flex-grow: 1;
+}
+
+.select-button {
+    margin-top: auto;
+    background-color: darkblue;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+}
+
+#team-wrapper {
+    margin-top: 10vh;
+
+    padding: 2rem 1rem 2rem 1rem;
+}
+
+#selected-penguins-wrapper {
+    margin-top: 2rem;
+}
+
+#team-wrapper > h2:first-of-type {
+    text-align: center;
+    background-color: cornflowerblue;
+    padding: 1rem 0rem;
+}
+
+#team-wrapper > p:first-of-type {
+    margin: 0 0 0 0;
+    padding: 0;
+    text-align: center;
+}
+
+.penguin-selected {
+    border: 3px solid #2e7d32;
+    background-color: rgba(46, 125, 50, 0.05);
+}
+
+.select-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #666;
+}
+
+.team-status {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: rgba(184, 134, 11, 0.1);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.team-status.team-full {
+    background-color: rgba(46, 125, 50, 0.15);
+    color: #2e7d32;
+}
+
+.team-member {
+    border-color: #2e7d32;
+    background-color: rgba(46, 125, 50, 0.05);
+}
