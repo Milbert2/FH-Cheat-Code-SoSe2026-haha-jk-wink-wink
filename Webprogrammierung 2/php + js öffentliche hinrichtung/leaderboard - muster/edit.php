@@ -5,29 +5,58 @@
 // ============================================================
 //
 // GET:
+//
 //     edit.php?id=5
 //
 // -> Score laden
 // -> Formular anzeigen
 //
 // POST:
+//
 // -> Score aktualisieren
 // -> zurück zu index.html
 //
+// ============================================================
+
+
+// ============================================================
+// DATENBANKVERBINDUNG
 // ============================================================
 
 require "functions.php";
 
 
 // ============================================================
-// ID holen
+// ID HOLEN
 // ============================================================
+
+// Die ID kann entweder aus GET oder POST kommen.
+//
+// GET:
+//
+// edit.php?id=5
+//
+// POST:
+//
+// <input type="hidden" name="id" value="5">
+//
+// ?? bedeutet:
+// Wenn GET["id"] nicht vorhanden ist,
+// wird POST["id"] verwendet.
+//
+// Wenn beides nicht vorhanden ist,
+// wird null verwendet.
 
 $id = $_GET["id"] ?? $_POST["id"] ?? null;
 
 
-// Keine ID
+// ============================================================
+// KEINE ID
+// ============================================================
+
 if (!$id) {
+
+    // Ohne ID können wir keinen Score bearbeiten.
 
     header("Location: index.html");
 
@@ -39,7 +68,19 @@ if (!$id) {
 // UPDATE
 // ============================================================
 
+// Wenn das Formular abgeschickt wurde,
+// ist die HTTP-Methode POST.
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+
+    // ========================================================
+    // UPDATE VORBEREITEN
+    // ========================================================
+
+    // Wieder werden ?-Platzhalter verwendet.
+//
+// Dadurch werden die User-Werte sicher eingesetzt.
 
     $stmt = $dbh->prepare(
         "UPDATE scores
@@ -50,6 +91,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
          WHERE id = ?"
     );
 
+
+    // ========================================================
+    // UPDATE AUSFÜHREN
+    // ========================================================
 
     $stmt->execute([
 
@@ -66,7 +111,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ]);
 
 
-    // Zurück zur Liste
+    // ========================================================
+    // ZURÜCK ZUR LISTE
+    // ========================================================
 
     header("Location: index.html");
 
@@ -78,6 +125,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // SCORE LADEN
 // ============================================================
 
+// Jetzt wird der Datensatz mit der ID geladen.
+//
+// prepare() verhindert SQL-Injection.
+//
+// ? wird später durch $id ersetzt.
+
 $stmt = $dbh->prepare(
     "SELECT *
      FROM scores
@@ -85,13 +138,39 @@ $stmt = $dbh->prepare(
 );
 
 
+// SQL ausführen und ID einsetzen.
+
 $stmt->execute([$id]);
 
+
+// ============================================================
+// SCORE HOLEN
+// ============================================================
+
+// fetch() holt EINEN Datensatz.
+//
+// Weil in functions.php
+//
+// PDO::FETCH_OBJ
+//
+// eingestellt wurde,
+// bekommen wir ein Objekt.
+//
+// Deshalb können wir später schreiben:
+//
+// $score->player
+// $score->points
+// $score->id
 
 $score = $stmt->fetch();
 
 
-// Score nicht gefunden
+// ============================================================
+// SCORE NICHT GEFUNDEN
+// ============================================================
+
+// Wenn fetch() nichts gefunden hat,
+// ist $score false.
 
 if (!$score) {
 
@@ -108,14 +187,25 @@ if (!$score) {
 
 <head>
 
+    <!-- Zeichencodierung -->
+
     <meta charset="UTF-8">
+
+
+    <!-- Responsive Darstellung -->
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
+
+    <!-- Seitentitel -->
+
     <title>Edit Score</title>
+
+
+    <!-- CSS -->
 
     <link rel="stylesheet" href="./styles.css">
 
@@ -129,18 +219,53 @@ if (!$score) {
          DIESE SEITE EXISTIERT NUR NACH KLICK AUF EDIT
          ====================================================== -->
 
+
+    <!-- Überschrift -->
+
     <h1>Edit Score</h1>
 
 
+    <!-- ======================================================
+         FORMULAR
+         ====================================================== -->
+
+    <!--
+        method="post":
+        Beim Absenden werden die Werte per POST
+        an dieselbe Datei geschickt.
+
+        Da kein action angegeben wurde,
+        wird die aktuelle URL verwendet.
+    -->
+
     <form method="post">
 
-        <!-- ID -->
+
+        <!-- ==================================================
+             ID
+             ================================================== -->
+
+        <!--
+            Hidden bedeutet:
+            Das Feld wird nicht sichtbar angezeigt.
+
+            Die ID wird aber beim POST mitgeschickt.
+
+            PHP kann sie dann über
+            $_POST["id"]
+            auslesen.
+        -->
+
         <input
             type="hidden"
             name="id"
             value="<?= $score->id ?>"
         >
 
+
+        <!-- ==================================================
+             PLAYER
+             ================================================== -->
 
         <input
             type="text"
@@ -150,6 +275,10 @@ if (!$score) {
         >
 
 
+        <!-- ==================================================
+             POINTS
+             ================================================== -->
+
         <input
             type="number"
             name="points"
@@ -157,6 +286,10 @@ if (!$score) {
             required
         >
 
+
+        <!-- ==================================================
+             DATE
+             ================================================== -->
 
         <input
             type="date"
@@ -166,6 +299,10 @@ if (!$score) {
         >
 
 
+        <!-- ==================================================
+             AVATAR
+             ================================================== -->
+
         <input
             type="text"
             name="avatar"
@@ -173,12 +310,22 @@ if (!$score) {
         >
 
 
+        <!-- Formular absenden -->
+
         <button type="submit">
             Speichern
         </button>
 
     </form>
 
+
+    <!-- ======================================================
+         ABBRECHEN
+         ====================================================== -->
+
+    <!--
+        Einfacher Link zurück zur Liste.
+    -->
 
     <a href="index.html">
         Abbrechen
