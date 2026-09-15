@@ -1,0 +1,138 @@
+<!-- ============================================================
+     index.html
+     ============================================================
+     
+     KEIN PHP IN DIESER DATEI!
+     
+     ADD -> add.php
+     EDIT -> edit.php
+     DELETE -> delete.php
+     
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>🏆 Leaderboard 🏆</title>
+
+    <link rel="stylesheet" href="./styles.css">
+
+</head>
+
+<body>
+
+<main>
+
+    <h1>🏆 Leaderboard 🏆</h1>
+
+
+    <!-- ======================================================
+         ADD
+         ====================================================== -->
+
+    <h2>Add Score</h2>
+
+    <form
+        method="post"
+        action="add.php"
+    >
+
+        <input
+            type="text"
+            name="player"
+            placeholder="Player"
+            required
+        >
+
+        <input
+            type="number"
+            name="points"
+            placeholder="Points"
+            required
+        >
+
+        <input
+            type="date"
+            name="played_at"
+            required
+        >
+
+        <input
+            type="text"
+            name="avatar"
+            placeholder="Avatar URL"
+        >
+
+        <button type="submit">
+            Add Score
+        </button>
+
+    </form>
+
+
+    <!-- ======================================================
+         SORTIERUNG
+         ====================================================== -->
+
+    <div id="radio-group">
+
+        <label>
+            <input
+                type="radio"
+                name="orderby"
+                value="points"
+                checked
+            >
+            Sort by Points
+        </label>
+
+        <label>
+            <input
+                type="radio"
+                name="orderby"
+                value="date"
+            >
+            Sort by Date
+        </label>
+
+        <label>
+            <input
+                type="radio"
+                name="orderby"
+                value="player"
+            >
+            Sort by Player
+        </label>
+
+    </div>
+
+
+    <!-- ======================================================
+         HIER ERSTELLT JAVASCRIPT DIE CARDS
+         ====================================================== -->
+
+    <div id="cards-wrapper"></div>
+
+
+    <span class="credits">
+        Avatars by
+        https://www.avatarsinpixels.com/pony/
+    </span>
+
+</main>
+
+
+<script src="./index.js" defer></script>
+
+</body>
+
+</html>
