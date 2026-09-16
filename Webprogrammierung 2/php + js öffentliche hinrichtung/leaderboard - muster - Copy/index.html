@@ -1,0 +1,265 @@
+<!-- ============================================================
+     index.html
+     ============================================================
+
+     KEIN PHP IN DIESER DATEI!
+
+     Diese Datei ist die HTML-Oberfläche.
+
+     ADD -> add.php
+     EDIT -> edit.php
+     DELETE -> delete.php
+
+     JavaScript übernimmt das Laden und Darstellen
+     der Scores.
+
+     ============================================================ -->
+
+<!DOCTYPE html>
+
+<!--
+    Das <html>-Element ist das äußerste Element
+    des HTML-Dokuments.
+
+    lang="en" gibt die Sprache des Dokuments an.
+-->
+
+<html lang="en">
+
+<head>
+
+    <!-- Zeichencodierung -->
+
+    <meta charset="UTF-8">
+
+
+    <!--
+        Sorgt dafür, dass die Seite auf mobilen Geräten
+        korrekt skaliert wird.
+    -->
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+
+    <!-- Titel im Browser-Tab -->
+
+    <title>🏆 Leaderboard 🏆</title>
+
+
+    <!-- CSS-Datei einbinden -->
+
+    <link rel="stylesheet" href="./styles.css">
+
+</head>
+
+<body>
+
+<!--
+    <main> enthält den Hauptinhalt der Seite.
+-->
+
+<main>
+
+    <!-- Überschrift -->
+
+    <h1>🏆 Leaderboard 🏆</h1>
+
+
+    <!-- ======================================================
+         ADD
+         ====================================================== -->
+
+    <h2>Add Score</h2>
+
+
+    <!--
+        Formular zum Hinzufügen eines Scores.
+
+        method="post":
+        Die Daten werden mit HTTP POST gesendet.
+
+        action="add.php":
+        Nach dem Absenden wird add.php aufgerufen.
+    -->
+
+    <form
+        method="post"
+        action="add.php"
+    >
+
+        <!--
+            Spielername.
+
+            name="player" ist wichtig:
+            PHP kann den Wert später mit
+            $_POST["player"] auslesen.
+
+            required bedeutet:
+            Das Feld muss ausgefüllt sein.
+        -->
+
+        <input
+            type="text"
+            name="player"
+            placeholder="Player"
+            required
+        >
+
+
+        <!-- Punkte -->
+
+        <input
+            type="number"
+            name="points"
+            placeholder="Points"
+            required
+        >
+
+
+        <!-- Datum -->
+
+        <input
+            type="date"
+            name="played_at"
+            required
+        >
+
+
+        <!-- Avatar-URL -->
+
+        <input
+            type="text"
+            name="avatar"
+            placeholder="Avatar URL"
+        >
+
+
+        <!-- Formular absenden -->
+
+        <button type="submit">
+            Add Score
+        </button>
+
+    </form>
+
+
+    <!-- ======================================================
+         SORTIERUNG
+         ====================================================== -->
+
+    <div id="radio-group">
+
+        <!--
+            Radio Button 1
+
+            name="orderby":
+            Alle drei Buttons haben denselben Namen.
+            Dadurch kann immer nur einer ausgewählt werden.
+
+            value="points":
+            Dieser Wert wird von JavaScript mit
+            radio.value ausgelesen.
+
+            checked:
+            Dieser Button ist beim Laden vorausgewählt.
+        -->
+
+        <label>
+            <input
+                type="radio"
+                name="orderby"
+                value="points"
+                checked
+            >
+            Sort by Points
+        </label>
+
+
+        <!-- Radio Button 2 -->
+
+        <label>
+            <input
+                type="radio"
+                name="orderby"
+                value="date"
+            >
+            Sort by Date
+        </label>
+
+
+        <!-- Radio Button 3 -->
+
+        <label>
+            <input
+                type="radio"
+                name="orderby"
+                value="player"
+            >
+            Sort by Player
+        </label>
+
+    </div>
+
+
+    <!-- ======================================================
+         HIER ERSTELLT JAVASCRIPT DIE CARDS
+         ====================================================== -->
+
+    <!--
+        Dieser Container ist zunächst leer.
+
+        JavaScript findet ihn über:
+
+        document.querySelector("#cards-wrapper")
+
+        und fügt dort die Cards ein.
+    -->
+
+       <div id="cards-wrapper">
+
+            <div class="card">
+
+                <span>1</span>
+
+                <img
+                    src="http://www.avatarsinpixels.com/pony/eyJCb2R5IjoiMyIsIlRhaWwiOiIxOSIsIlNob2VzIjoiOCIsIk1hcmsiOiIzIiwiV2luZ3MiOiI0IiwiRXllcyI6IjQiLCJIYWlyVG9wIjoiMyIsIlNhaXJwQXR0b20iOiIyIiwiaGFpclRvbmUiOiI0YjA2NDMiLCJoYWlyVG9uZTIiOiIwNjE5ZjciLCJza2luVG9uZSI6IjgzNmJlNyIsInNraW5Ub25lMiI6IjQ0NWIzZiIsInNob2VzVG9uZSI6ImZiN2JkMCIsInNob2VzVG9uZTIiOiIwN2YxNzQiLCJza2luVG9uZTMiOiJkYjhjY2QiLCJleWVzVG9uZSI6IjdjMzkyMSIsIm1hcmtUb25lIjoiZThlZDM5In0=/1/show.png"
+                    alt="Player Name"
+                >
+
+                <span>Player Name</span>
+
+                <span>Points</span>
+
+                <span>Date</span>
+
+            </div>
+
+        </div>
+
+
+        <span class="credits">
+            Avatars by https://www.avatarsinpixels.com/pony/
+        </span>
+
+
+<!--
+    JavaScript-Datei einbinden.
+
+    defer bedeutet:
+    Das Script wird heruntergeladen, während das HTML
+    weiter geladen wird, aber erst ausgeführt,
+    wenn das HTML geparst wurde.
+-->
+
+<script
+    src="./index.js"
+    type="module"
+    defer
+></script>
+
+</body>
+
+</html>
