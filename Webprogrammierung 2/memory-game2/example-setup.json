@@ -1,0 +1,30 @@
+{
+  "grid": [
+    {
+      "name": "Gabel",
+      "image": "https://picsum.photos/id/23/200/150"
+    },
+    {
+      "name": "Tasse",
+      "image": "https://picsum.photos/id/30/200/150"
+    },
+    {
+      "name": "Kugeln",
+      "image": "https://picsum.photos/id/139/200/150"
+    },
+    {
+      "name": "Kamera",
+      "image": "https://picsum.photos/id/250/200/150"
+    }
+  ],
+  "questions": [
+    "Kamera",
+    "Gabel",
+    "Kugeln",
+    "Gabel",
+    "Tasse",
+    "Kugeln",
+    "Kamera",
+    "Tasse"
+  ]
+}
