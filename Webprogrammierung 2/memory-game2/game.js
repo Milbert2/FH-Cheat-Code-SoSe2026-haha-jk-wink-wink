@@ -1,10 +1,9 @@
-// 8 questions * 3seconds each
+
 import { startTimer, stopTimer } from './timer.js';
 
 const QuizQuestionTime = 8*3;
 
-// Frozen to prevent accidental mutation of state constants at runtime,
-// since `state` is compared by reference throughout the class.
+
 const QuizState = Object.freeze({
     BEFORE: 'before start',
     ASK: 'ask',
@@ -15,21 +14,16 @@ const QuizState = Object.freeze({
 export class GameApp {
 
     constructor(setup, parent) {
-        // Analyse Game Setup data
         this.grid = setup.grid;
         this.questions = setup.questions;
         this.totalQuestions = this.questions.length;
         this.state = QuizState.BEFORE;
 
-        // finde DOM elements
         this.gridWrapper = parent.querySelector(".grid");
         this.questionWrapper = parent.querySelector(".question");
         this.scoreDisplay = parent.querySelector(".score");
         this.timerElement = parent.querySelector(".timer");
 
-        // Fail fast: if the expected DOM structure isn't present, every
-        // later method silently no-ops on null refs, so catch it here
-        // and abort construction instead of throwing later.
         if (!this.gridWrapper || !this.questionWrapper || !this.scoreDisplay || !this.timerElement) {
             throw new Error(`Missing required elements in${parent}`);
         }
@@ -39,13 +33,10 @@ export class GameApp {
             console.error("Missing start button in", parent);
             return;
         }
-        // TODO: start button can be clicked, calls startGame() to start the game.
         this.startButton.addEventListener("click", () => {
             this.startGame();
         });
 
-        // before the game start: display all the images in the grid,
-        // so the player can memorize them.
         this.initGrid();
     }
 
@@ -73,11 +64,8 @@ export class GameApp {
 
     startGame() {
         this.currentQuestionIndex = 0;
-        // keep the score as an array of plus/minus values
         this.score = [];
         this.state = QuizState.ASK;
-        // Hide all grid items before the round starts so the first
-        // question isn't spoiled by a fully revealed grid.
         this.displayGrid(false);
         this.showQuestion();
 
@@ -122,11 +110,10 @@ export class GameApp {
         this.questionWrapper.appendChild(img);
     }
 
-
     handleClick(event, item) {
         const grid_item = event.currentTarget.parentElement;
         console.log("clicked on", item.name, "in state", this.state," clicked on", grid_item);
-        // Guard against double-answers / clicks landing after game over.
+
         if( this.state !== QuizState.ASK) {
             console.log("ignoring click because we are not in ASK state");
             return;
@@ -142,14 +129,9 @@ export class GameApp {
             this.score.push(-2);
         }
 
-
         this.displayScore();
 
-
         if( this.currentQuestionIndex < this.totalQuestions-1) {
-            // Staggered timeouts: let the player see the revealed answer
-            // (500ms) before it's hidden again and the next question
-            // replaces it (550ms), avoiding an abrupt flash-cut.
             setTimeout(() => grid_item.classList.remove('show'), 500);
             setTimeout(() => this.nextQuestion(), 550);
         } else {
