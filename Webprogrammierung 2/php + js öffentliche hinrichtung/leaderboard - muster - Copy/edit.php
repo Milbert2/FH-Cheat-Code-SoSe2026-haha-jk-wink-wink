@@ -181,31 +181,21 @@ if (!$score) {
 
 ?>
 
+    
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 
-    <!-- Zeichencodierung -->
-
     <meta charset="UTF-8">
-
-
-    <!-- Responsive Darstellung -->
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
-
-    <!-- Seitentitel -->
-
     <title>Edit Score</title>
-
-
-    <!-- CSS -->
 
     <link rel="stylesheet" href="./styles.css">
 
@@ -215,57 +205,17 @@ if (!$score) {
 
 <main>
 
-    <!-- ======================================================
-         DIESE SEITE EXISTIERT NUR NACH KLICK AUF EDIT
-         ====================================================== -->
-
-
-    <!-- Überschrift -->
-
     <h1>Edit Score</h1>
-
-
-    <!-- ======================================================
-         FORMULAR
-         ====================================================== -->
-
-    <!--
-        method="post":
-        Beim Absenden werden die Werte per POST
-        an dieselbe Datei geschickt.
-
-        Da kein action angegeben wurde,
-        wird die aktuelle URL verwendet.
-    -->
 
     <form method="post">
 
 
-        <!-- ==================================================
-             ID
-             ================================================== -->
-
-        <!--
-            Hidden bedeutet:
-            Das Feld wird nicht sichtbar angezeigt.
-
-            Die ID wird aber beim POST mitgeschickt.
-
-            PHP kann sie dann über
-            $_POST["id"]
-            auslesen.
-        -->
 
         <input
             type="hidden"
             name="id"
             value="<?= $score->id ?>"
         >
-
-
-        <!-- ==================================================
-             PLAYER
-             ================================================== -->
 
         <input
             type="text"
@@ -274,22 +224,12 @@ if (!$score) {
             required
         >
 
-
-        <!-- ==================================================
-             POINTS
-             ================================================== -->
-
         <input
             type="number"
             name="points"
             value="<?= $score->points ?>"
             required
         >
-
-
-        <!-- ==================================================
-             DATE
-             ================================================== -->
 
         <input
             type="date"
@@ -298,19 +238,11 @@ if (!$score) {
             required
         >
 
-
-        <!-- ==================================================
-             AVATAR
-             ================================================== -->
-
         <input
             type="text"
             name="avatar"
             value="<?= htmlspecialchars($score->avatar ?? '') ?>"
         >
-
-
-        <!-- Formular absenden -->
 
         <button type="submit">
             Speichern
@@ -318,14 +250,6 @@ if (!$score) {
 
     </form>
 
-
-    <!-- ======================================================
-         ABBRECHEN
-         ====================================================== -->
-
-    <!--
-        Einfacher Link zurück zur Liste.
-    -->
 
     <a href="index.html">
         Abbrechen
