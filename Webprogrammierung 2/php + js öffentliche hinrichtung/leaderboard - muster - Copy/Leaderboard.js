@@ -33,6 +33,16 @@ export class Leaderboard {
                 <span>${score.points}</span>
 
                 <span>${score.played_at}</span>
+           
+                <a href="edit.php?id=${score.id}">
+                    Edit
+                </a>
+
+
+
+                <a href="delete.php?id=${score.id}">
+                    Delete
+                </a>
             `;
 
             this.parentElement.appendChild(card);
