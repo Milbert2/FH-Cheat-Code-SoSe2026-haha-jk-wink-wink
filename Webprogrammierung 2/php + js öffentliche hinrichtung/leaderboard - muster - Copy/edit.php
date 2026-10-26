@@ -1,86 +1,17 @@
 <?php
 
-// ============================================================
-// edit.php
-// ============================================================
-//
-// GET:
-//
-//     edit.php?id=5
-//
-// -> Score laden
-// -> Formular anzeigen
-//
-// POST:
-//
-// -> Score aktualisieren
-// -> zurück zu index.html
-//
-// ============================================================
-
-
-// ============================================================
-// DATENBANKVERBINDUNG
-// ============================================================
-
 require "functions.php";
-
-
-// ============================================================
-// ID HOLEN
-// ============================================================
-
-// Die ID kann entweder aus GET oder POST kommen.
-//
-// GET:
-//
-// edit.php?id=5
-//
-// POST:
-//
-// <input type="hidden" name="id" value="5">
-//
-// ?? bedeutet:
-// Wenn GET["id"] nicht vorhanden ist,
-// wird POST["id"] verwendet.
-//
-// Wenn beides nicht vorhanden ist,
-// wird null verwendet.
-
 $id = $_GET["id"] ?? $_POST["id"] ?? null;
 
 
-// ============================================================
-// KEINE ID
-// ============================================================
-
 if (!$id) {
 
-    // Ohne ID können wir keinen Score bearbeiten.
-
     header("Location: index.html");
-
     exit;
 }
 
 
-// ============================================================
-// UPDATE
-// ============================================================
-
-// Wenn das Formular abgeschickt wurde,
-// ist die HTTP-Methode POST.
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-
-    // ========================================================
-    // UPDATE VORBEREITEN
-    // ========================================================
-
-    // Wieder werden ?-Platzhalter verwendet.
-//
-// Dadurch werden die User-Werte sicher eingesetzt.
 
     $stmt = $dbh->prepare(
         "UPDATE scores
@@ -92,44 +23,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     );
 
 
-    // ========================================================
-    // UPDATE AUSFÜHREN
-    // ========================================================
-
     $stmt->execute([
 
         $_POST["player"],
-
         $_POST["points"],
-
         $_POST["played_at"],
-
         $_POST["avatar"],
-
         $id
-
     ]);
 
 
-    // ========================================================
-    // ZURÜCK ZUR LISTE
-    // ========================================================
-
     header("Location: index.html");
-
     exit;
 }
 
-
-// ============================================================
-// SCORE LADEN
-// ============================================================
-
-// Jetzt wird der Datensatz mit der ID geladen.
-//
-// prepare() verhindert SQL-Injection.
-//
-// ? wird später durch $id ersetzt.
 
 $stmt = $dbh->prepare(
     "SELECT *
@@ -137,45 +44,12 @@ $stmt = $dbh->prepare(
      WHERE id = ?"
 );
 
-
-// SQL ausführen und ID einsetzen.
-
 $stmt->execute([$id]);
-
-
-// ============================================================
-// SCORE HOLEN
-// ============================================================
-
-// fetch() holt EINEN Datensatz.
-//
-// Weil in functions.php
-//
-// PDO::FETCH_OBJ
-//
-// eingestellt wurde,
-// bekommen wir ein Objekt.
-//
-// Deshalb können wir später schreiben:
-//
-// $score->player
-// $score->points
-// $score->id
-
 $score = $stmt->fetch();
-
-
-// ============================================================
-// SCORE NICHT GEFUNDEN
-// ============================================================
-
-// Wenn fetch() nichts gefunden hat,
-// ist $score false.
 
 if (!$score) {
 
     header("Location: index.html");
-
     exit;
 }
 
